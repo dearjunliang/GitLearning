@@ -38,7 +38,6 @@ npm run build:prod
 ├── docker/                          # docker配置目录
 │   └── Dockerfile                   # docker配置文件
 ├── public/                          # 公共资源目录
-│   ├── index.html                   # 入口HTML文件
 │   ├── nginx.conf                   # nginx代理配置文件
 │   └── favicon.ico                  # 网站图标
 ├── src/                             # 项目源代码目录
@@ -50,14 +49,16 @@ npm run build:prod
 │   │   ├── images/                  # 图片资源目录
 │   │   └── styles/                  # 样式资源目录
 │   ├── components/                  # 公共组件目录
+│   │   ├── ComponentA/              # 公共组件A目录
+│   │   │   └── index.vue            # 公共组件A
+│   │   └── ComponentB/              # 公共组件B目录
+│   ├── hooks/                       # 公共封装hooks目录
 │   ├── layout/                      # 布局组件目录
-│   ├── minxins/                     # minxin目录
 │   ├── router/                      # 路由器目录
 │   │   └── index.ts                 # 路由器配置文件
 │   ├── store/                       # 状态管理目录
 │   │   ├── modules/                 # 模块化状态管理目录
-│   │   ├── index.ts                 # 状态管理配置文件
-│   │   └── getters.js               # 状态开放方法配置文件
+│   │   └── index.ts                 # 状态管理配置文件
 │   ├── utils/                       # 工具函数目录
 │   │   ├── request.js               # API请求封装函数
 │   │   ├── auth.js                  # 鉴权相关函数
@@ -74,10 +75,11 @@ npm run build:prod
 │   └── unit/                        # 单元测试目录
 │       ├── specs/                   # 测试规范目录
 │       └── jest.config.js           # Jest测试配置文件
+├── index.html                       # 入口HTML文件
 ├── .editorconfig                    # 编辑器配置文件
-├── .eslintrc.cjs                     # ESLint配置文件
+├── .eslintrc.cjs                    # ESLint配置文件
 ├── .prettierrc.js                   # Prettier配置文件
-├── vue.config.js                    # vue-cli配置文件
+├── vite.config.js                   # vite配置文件
 ├── package.json                     # 项目依赖及配置文件
 └── README.md                        # 项目说明文件
 ```
