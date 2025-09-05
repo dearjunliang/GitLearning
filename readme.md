@@ -1,13 +1,16 @@
+<h1>ofm-front</h1>
+
+## 介绍
+`ofm-front`工程为`中国电信综合调度中心`项目前端工程
+完全采用 `ECMAScript` 模块（`ESM`）规范来编写和组织代码，使用了最新的 `Vue3`、`Vite`、`Element-Plus`、`TypeScript`、`Pinia`、`Tailwindcss` 等主流技术开发
+
 ## 开发
 
 ```bash
 # 安装依赖
-npm install
+pnpm i
 
-# 推荐使用yarn或者pnpm下载依赖
-npm install yarn -g
-yarn
-
+# 全局安装和使用pnpm下载依赖
 npm install pnpm -g
 pnpm i
 
@@ -15,7 +18,7 @@ pnpm i
 npm run dev
 ```
 
-## 发布
+## 打包
 
 ```bash
 # 构建测试环境
@@ -24,6 +27,10 @@ npm run build:stage
 # 构建生产环境
 npm run build:prod
 ```
+## 主要插件
+项目内主要使用到的插件及其版本信息如下：
+
+#### [element-plus](https://element-plus.org)
 
 ## 目录划分
 
@@ -35,11 +42,12 @@ npm run build:prod
 
 ```
 .
-├── docker/                          # docker配置目录
-│   └── Dockerfile                   # docker配置文件
+├── build/                           # 打包配置目录
+├── mock/                            # mock方法、数据存放目录
 ├── public/                          # 公共资源目录
-│   ├── nginx.conf                   # nginx代理配置文件
-│   └── favicon.ico                  # 网站图标
+│   ├── favicon.ico                  # 网站图标
+│   ├── logo.svg                     # 网站Logo
+│   └── platform-config.json         # 网站配置文件
 ├── src/                             # 项目源代码目录
 │   │── api                          # API请求封装函数
 │   │   ├── home/                    # 首页业务接口目录
@@ -49,25 +57,29 @@ npm run build:prod
 │   │   ├── images/                  # 图片资源目录
 │   │   └── styles/                  # 样式资源目录
 │   ├── components/                  # 公共组件目录
-│   │   ├── ComponentA/              # 公共组件A目录
-│   │   │   └── index.vue            # 公共组件A
-│   │   └── ComponentB/              # 公共组件B目录
-│   ├── hooks/                       # 公共封装hooks目录
+│   ├── config/                      # 公共配置目录
+│   ├── directives/                  # 公共指令目录
 │   ├── layout/                      # 布局组件目录
+│   ├── plugins/                     # plugins目录
 │   ├── router/                      # 路由器目录
 │   │   └── index.ts                 # 路由器配置文件
 │   ├── store/                       # 状态管理目录
 │   │   ├── modules/                 # 模块化状态管理目录
-│   │   └── index.ts                 # 状态管理配置文件
+│   │   ├── index.ts                 # 状态管理配置文件
+│   │   └── utils.js                 # 状态管理方法文件
+│   ├── style/                       # 公共样式目录
+│   │   ├── index.scss               # main样式文件
+│   │   ├── reset.scss               # 重设样式文件
+│   │   └── theme.scss               # 主题样式文件
 │   ├── utils/                       # 工具函数目录
-│   │   ├── request.js               # API请求封装函数
-│   │   ├── auth.js                  # 鉴权相关函数
+│   │   ├── http/                    # API请求封装函数
+│   │   ├── auth.ts                  # 鉴权相关函数
 │   │   └── index.ts                 # 辅助函数
 │   ├── views/                       # 页面视图目录
 │   │   ├── home/                    # 首页相关页面目录
 │   │   └── login/                   # 登录相关页面目录
 │   ├── App.vue                      # 根组件
-│   └── main.js                      # 项目入口文件
+│   └── main.ts                      # 项目入口文件
 ├── tests/                           # 测试目录
 │   ├── e2e/                         # 端到端测试目录
 │   │   ├── specs/                   # 测试规范目录
@@ -75,11 +87,16 @@ npm run build:prod
 │   └── unit/                        # 单元测试目录
 │       ├── specs/                   # 测试规范目录
 │       └── jest.config.js           # Jest测试配置文件
-├── index.html                       # 入口HTML文件
+├── types/                           # types目录
+├── .env                             # 环境配置文件
 ├── .editorconfig                    # 编辑器配置文件
-├── .eslintrc.cjs                    # ESLint配置文件
 ├── .prettierrc.js                   # Prettier配置文件
+├── commitlint.config.js             # CommitLint配置文件
+├── tsconfig.js                      # TypeScript配置文件
+├── eslint.config.js                 # ESLint配置文件
+├── Dockerfile                       # docker配置文件
 ├── vite.config.js                   # vite配置文件
+├── index.html                       # 入口HTML文件
 ├── package.json                     # 项目依赖及配置文件
 └── README.md                        # 项目说明文件
 ```
@@ -87,12 +104,12 @@ npm run build:prod
 ## 注意事项
 
 - 基础表格页面布局参考：[比翼设计交互规范-表格](https://help.ctbiyi.com/biyi-design/ui-design/table.html)
-   - 搜索区最多一行，超出一行收起隐藏，出现"展开"文字按钮；
-   - 每行4个输入框或下拉框，不满4个时，按钮居右展示，正好满一行时，按钮另起一行；
-   - 按钮样式参考：[比翼设计交互规范-按钮](https://help.ctbiyi.com/biyi-design/ui-design/button.html)
-   - 输入框或下拉框高度设为32px，表格页面label在左侧居右，配置表单弹窗中label顶部居左，按钮高度一致也为32px；
-   - 配置弹窗宽度：800px，高度小于800px，如超出滚动显示；提示类弹窗宽度400px，高度小于400px；特殊弹窗可自行定义宽高；
-   - 表格操作按钮在表格上方一行，居右显示，按钮间距为10px；
+  - 搜索区最多一行，超出一行收起隐藏，出现"展开"文字按钮；
+  - 每行4个输入框或下拉框，不满4个时，按钮居右展示，正好满一行时，按钮另起一行；
+  - 按钮样式参考：[比翼设计交互规范-按钮](https://help.ctbiyi.com/biyi-design/ui-design/button.html)
+  - 输入框或下拉框高度设为32px，表格页面label在左侧居右，配置表单弹窗中label顶部居左，按钮高度一致也为32px；
+  - 配置弹窗宽度：800px，高度小于800px，如超出滚动显示；提示类弹窗宽度400px，高度小于400px；特殊弹窗可自行定义宽高；
+  - 表格操作按钮在表格上方一行，居右显示，按钮间距为10px；
 
 ## 开发样例
 1. 文件命名规范：文件名应该清晰明了，有意义，使用小驼峰命名法。例如，`userProfile.vue`。
@@ -187,6 +204,10 @@ feat(login): 添加用户注册功能
 关联问题：#123
 ```
 
+## 致谢
+本项目是基于[xiaoxian521](https://github.com/xiaoxian521)、[Ten-K](https://github.com/Ten-K)维护的MIT许可的开源项目 [vue-pure-admin](https://github.com/pure-admin/vue-pure-admin) 提炼出的架子进行二次开发，更适合实际项目开发。原项目采用MIT许可证授权[MIT © 2020-present, pure-admin](https://github.com/pure-admin/vue-pure-admin/blob/main/LICENSE)。
 
+## 文档
 
-
+[点我查看 vue-pure-admin 文档](https://pure-admin.cn/)  
+[点我查看 @pureadmin/utils 文档](https://pure-admin-utils.netlify.app)
